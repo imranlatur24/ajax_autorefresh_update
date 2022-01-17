@@ -1,14 +1,14 @@
 from django.shortcuts import render,HttpResponse
-from .models import StudentModel
+from .models import StudentModel,Listdata
 from django.http import JsonResponse
 # Create your views here.
 
 def dashboard(request):
     return render(request,"index.html")
 
-def student_data(request):
-    stud = StudentModel.objects.all()
-    return JsonResponse({'students':list(stud.values())})
+def getProducts(request):
+    products = Listdata.objects.all()
+    return JsonResponse({'products':list(products.values())})
 
 def create(request):
     if request.method=='POST':

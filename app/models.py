@@ -7,3 +7,10 @@ class StudentModel(models.Model):
     mobiles=models.BigIntegerField()
     class Meta:
         db_table="student"
+
+class Listdata(models.Model):
+    product_name = models.CharField(max_length=255,default='')
+    class Meta:
+        db_table="products"
+    def __str__(self):
+        return self.product_name

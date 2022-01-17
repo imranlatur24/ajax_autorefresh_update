@@ -18,7 +18,35 @@
     <input type="submit" class="btn btn-primary btn-sm">
 </form>
 </div>
+<h3>Autorefresh listview</h3>
+<ui id="display_list">
+
+</ui>
 <script>
+<!--this if for list-->
+$(document).ready(function(){
+        setInterval(function(){
+            $.ajax({
+                type:'GET',
+                url:{% url "getProducts" %},
+                success:function(response)
+                {
+                    console.log(response);
+                    $('#display_list').empty();
+                    for (var key in response.products)
+                    {
+                        var temp = "<li>"+response.products[key].product_name+"</li>";
+                        $('#display_list').append(temp);
+                    }
+                },
+                error:function(response){
+                    alert('no data found');
+                }
+            });
+        },1000);
+    });
+
+
 $(document).on('submit','#form1',function(e){
     e.preventdefault();
     $.ajax({
